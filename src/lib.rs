@@ -482,7 +482,7 @@ where
         T: 'static,
     {
         if input_map.wants_clear {
-            input.update();
+            input.clear();
             let mut v = vec![];
             for i in input.get_pressed().cloned() {
                 v.push(i);
@@ -510,7 +510,7 @@ where
     T: Hash + Eq + Clone + Send + Sync,
     'a: 'static,
 {
-    fn build(&self, app: &mut AppBuilder) {
+    fn build(&self, app: &mut App) {
         app.init_resource::<InputMap<T>>()
             .add_system_to_stage(CoreStage::PreUpdate, InputMap::<T>::key_input.system())
             .add_system_to_stage(CoreStage::PreUpdate, InputMap::<T>::gamepad_state.system())
